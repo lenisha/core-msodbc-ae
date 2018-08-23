@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <h2>DataBase </h2>
+    <table>
+        @for (int i = 0; i < (int)ViewData["Rows"]; i++)
+    {
+        <tr>
+            <td>@ViewData["Row" + i]</td>
+        </tr>
+}
+    </table>
+</div>

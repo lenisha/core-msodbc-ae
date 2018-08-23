@@ -1,0 +1,14 @@
+﻿applications:
+ - name: coretest
+   buildpack: dotnet_core_buildpack 
+   env:
+     LD_LIBRARY_PATH: /home/vcap/app/msodbcsql17
+     ODBCSYSINI: /home/vcap/app/msodbcsql17
+     ODBC__Server: "tcp:<server>,1433"
+     ODBC__Database:
+     ODBC__Uid: 
+     ODBC__Pwd: 
+     ODBC__ColumnEncryption: Enabled
+     ODBC__KeyStoreAuthentication: KeyVaultClientSecret
+     ODBC__KeyStorePrincipalId: 
+     ODBC__KeyStoreSecret: 

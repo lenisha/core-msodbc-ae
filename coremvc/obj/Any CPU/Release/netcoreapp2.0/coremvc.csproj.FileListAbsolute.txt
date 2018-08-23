@@ -1,0 +1,11 @@
+C:\projects\coremvc\coremvc\bin\Any CPU\Release\netcoreapp2.0\coremvc.deps.json
+C:\projects\coremvc\coremvc\bin\Any CPU\Release\netcoreapp2.0\coremvc.runtimeconfig.json
+C:\projects\coremvc\coremvc\bin\Any CPU\Release\netcoreapp2.0\coremvc.runtimeconfig.dev.json
+C:\projects\coremvc\coremvc\bin\Any CPU\Release\netcoreapp2.0\coremvc.dll
+C:\projects\coremvc\coremvc\bin\Any CPU\Release\netcoreapp2.0\coremvc.pdb
+C:\projects\coremvc\coremvc\obj\Any CPU\Release\netcoreapp2.0\coremvc.csproj.CoreCompileInputs.cache
+C:\projects\coremvc\coremvc\obj\Any CPU\Release\netcoreapp2.0\coremvc.AssemblyInfoInputs.cache
+C:\projects\coremvc\coremvc\obj\Any CPU\Release\netcoreapp2.0\coremvc.AssemblyInfo.cs
+C:\projects\coremvc\coremvc\obj\Any CPU\Release\netcoreapp2.0\coremvc.dll
+C:\projects\coremvc\coremvc\obj\Any CPU\Release\netcoreapp2.0\coremvc.pdb
+C:\projects\coremvc\coremvc\bin\Any CPU\Release\netcoreapp2.0\manifest.yml

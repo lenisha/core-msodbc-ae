@@ -1,0 +1,6 @@
+﻿applications:
+ - name: coretest
+   buildpack: dotnet_core_buildpack 
+   env:
+     LD_LIBRARY_PATH: /home/vcap/app/msodbcsql17
+     ODBCSYSINI: /home/vcap/app/msodbcsql17

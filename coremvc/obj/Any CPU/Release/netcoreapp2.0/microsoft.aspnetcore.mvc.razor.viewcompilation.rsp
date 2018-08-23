@@ -1,0 +1,12 @@
+C:\projects\coremvc\coremvc
+--output-path=obj\Any CPU\Release\netcoreapp2.0\
+--application-name=coremvc
+--content-root=C:\projects\coremvc\coremvc
+--file=C:\projects\coremvc\coremvc\Views\Home\About.cshtml
+--file=C:\projects\coremvc\coremvc\Views\Home\Contact.cshtml
+--file=C:\projects\coremvc\coremvc\Views\Home\Index.cshtml
+--file=C:\projects\coremvc\coremvc\Views\Shared\Error.cshtml
+--file=C:\projects\coremvc\coremvc\Views\Shared\_Layout.cshtml
+--file=C:\projects\coremvc\coremvc\Views\Shared\_ValidationScriptsPartial.cshtml
+--file=C:\projects\coremvc\coremvc\Views\_ViewImports.cshtml
+--file=C:\projects\coremvc\coremvc\Views\_ViewStart.cshtml
