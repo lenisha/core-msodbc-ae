@@ -14,14 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="manifest-elena.yml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="manifest.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="msodbcsql17\**" CopyToPublishDirectory="Always" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="manifest-elena.yml" />
   </ItemGroup>
 
 </Project>

@@ -60,14 +60,14 @@ In this example full connection string is combined from settings in `appsettings
 
 Refer to `manifest.yml` for example  of setting connection string variables:
 ```
-     ODBC__Server:
-     ODBC__Database:
-     ODBC__Uid: 
-     ODBC__Pwd: 
+     ODBC__Server: "tcp:<server>,1433"
+     ODBC__Database: <db name>
+     ODBC__Uid: <db user>
+     ODBC__Pwd: <db user password>
      ODBC__ColumnEncryption: Enabled
      ODBC__KeyStoreAuthentication: KeyVaultClientSecret
-     ODBC__KeyStorePrincipalId: 
-     ODBC__KeyStoreSecret: 
+     ODBC__KeyStorePrincipalId: <spn id>
+     ODBC__KeyStoreSecret: <spn secret>
 ```
 
 ### Build and Run
