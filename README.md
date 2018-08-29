@@ -79,7 +79,13 @@ Set all the ODBC connectivity vaules in `manifest.yml` with your SQL server/db a
 ```
 dotnet restore
 dotnet build
-dotnet publish
+dotnet publish -c Release
+```
+
+Note: added in project to point to linux runtime (used by PCF cells) and .net runtime that is used by dotnetcore2.0.6 buildpack
+```
+	<RuntimeIdentifiers>ubuntu.14.04-x64</RuntimeIdentifiers>
+	<RuntimeFrameworkVersion>2.0.6</RuntimeFrameworkVersion>
 ```
 
 - Navigate to publish directory and push the application (manifest will be located there as well)
