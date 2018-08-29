@@ -1,6 +1,6 @@
 ﻿applications:
  - name: coretest
-   buildpack: dotnet_core_buildpack 
+   buildpack: https://github.com/cloudfoundry/dotnet-core-buildpack.git#v2.0.7
    env:
      LD_LIBRARY_PATH: /home/vcap/app/msodbcsql17
      ODBCSYSINI: /home/vcap/app/msodbcsql17
