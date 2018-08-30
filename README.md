@@ -82,18 +82,20 @@ dotnet build
 dotnet publish -c Release
 ```
 
-Note: added in project to point to linux runtime (used by PCF cells) and .net runtime that is used by dotnetcore2.0.6 buildpackit 
+Note: added in project file to point to linux runtime (used by PCF cells) and .net runtime that is used by dotnetcore2.1 buildpack 
 ```
+    <TargetFramework>netcoreapp2.1</TargetFramework>
 	<RuntimeIdentifiers>ubuntu.14.04-x64</RuntimeIdentifiers>
-	<RuntimeFrameworkVersion>2.0.7</RuntimeFrameworkVersion>
+	<RuntimeFrameworkVersion>2.1.0</RuntimeFrameworkVersion>
 ```
 
-- Navigate to publish directory and push the application (manifest will be located there as well)
+- Navigate to publish directory and push the application and specify buildpack (manifest will be located there as well)
 
 ```
-cd bin/Release/netcoreapp2.0/publish
-cf push
+cd bin/Release/netcoreapp2.1/publish
+cf push -f manifest.yml -b https://github.com/cloudfoundry/dotnet-core-buildpack.git#v2.1.4
 ```
+
 - Navigate to application home - this page will retrive and show data that was encrypted
 
 #### Note: Tested on both PCF and Ubuntu 14 VM 
