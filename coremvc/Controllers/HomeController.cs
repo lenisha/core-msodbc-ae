@@ -60,7 +60,7 @@ namespace coremvc.Controllers
 
             using (IDbCommand dbcmd = dbcon.CreateCommand())
             {
-                dbcmd.CommandText = "SELECT * FROM person";
+                dbcmd.CommandText = "SELECT * FROM assessment";
 
                 IDataReader dbReader = dbcmd.ExecuteReader();
                 int fCount = dbReader.FieldCount;
@@ -80,8 +80,10 @@ namespace coremvc.Controllers
                     String rowData = "";
                     for (int i = 0; i < fCount; i++)
                     {
-                        String col = dbReader.GetString(i);
-                        rowData = rowData + " | " + col;
+                        object col = dbReader.GetValue(i);
+                        
+
+                        rowData = rowData + " | " + ConvertFromDBVal<string>(col);
                     }
                     ViewData["Row" + row] = rowData;
                     row++;
@@ -93,6 +95,18 @@ namespace coremvc.Controllers
 
            
             return View();
+        }
+
+        public static T ConvertFromDBVal<T>(object obj)
+        {
+            if (obj == null || obj == DBNull.Value)
+            {
+                return default(T); // returns the default value for the type
+            }
+            else
+            {
+                return (T)obj;
+            }
         }
 
         public IActionResult About()

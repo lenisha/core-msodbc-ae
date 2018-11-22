@@ -26,16 +26,30 @@ Example could be found in this project `manifest.yml`
 This example uses very simple SQL table that could be created
  
  ```
-    CREATE TABLE dbo.person  
-        ( First_Name varchar(25) NOT NULL,  
-            Last_Name varchar(50) NULL)  
-    GO 
+  CREATE TABLE [dbo].[assessment] (
+    [assessment_id] [nvarchar](max),        
+    [database_name] [nvarchar](200),        
+    [space_name] [nvarchar](40),    
+    [connection_string] [nvarchar](max),    
+    [assessment_status] [nvarchar](max),
+    [assessment_parameters] [nvarchar](max),
+    [email_list] [nvarchar](max),       
+    [assessment_result] [nvarchar](max),        
+    [errors] [nvarchar](max),
+    [created_on] DATETIME,
+    [modified_on] DATETIME
+)
+ GO
 
-    INSERT person Values ('Test', 'Blah blah');
-    INSERT person Values ('Test2', 'mine blah');
-    INSERT person Values ('Test3', 'ohhhh blah');
+ 
+ Insert into [dbo].[assessment] ( assessment_id, assessment_status) values ('aaa', 'dsdsd');
+ Insert into [dbo].[assessment] ( assessment_id, assessment_status) values ('bbb', 'dddd');
+
+ select * from [dbo].[assessment];
+
   ```
-  - Use AlwaysEncrypted SSMS wizard or powershell to encrypt one of the columns
+ 
+ - Use AlwaysEncrypted SSMS wizard or powershell to encrypt one of the columns
 
 ### SQL Connection 
 
@@ -86,7 +100,7 @@ Note: added in project file to point to linux runtime (used by PCF cells) and .n
 ```
     <TargetFramework>netcoreapp2.1</TargetFramework>
 	<RuntimeIdentifiers>ubuntu.14.04-x64</RuntimeIdentifiers>
-	<RuntimeFrameworkVersion>2.1.0</RuntimeFrameworkVersion>
+	<RuntimeFrameworkVersion>2.1.4</RuntimeFrameworkVersion>
 ```
 
 - Navigate to publish directory and push the application and specify buildpack (manifest will be located there as well)
