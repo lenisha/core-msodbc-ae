@@ -118,7 +118,15 @@ extern "C" {
 #define SQL_COPT_SS_CEKEYSTOREDATA                  (SQL_COPT_SS_BASE_EX+12) /* Communicate with loaded keystore providers */
 #define SQL_COPT_SS_TRUSTEDCMKPATHS                 (SQL_COPT_SS_BASE_EX+13) /* List of trusted CMK paths */
 #define SQL_COPT_SS_CEKCACHETTL                     (SQL_COPT_SS_BASE_EX+14) /* Symmetric Key Cache TTL */
+#define SQL_COPT_SS_AUTHENTICATION                  (SQL_COPT_SS_BASE_EX+15) /* The authentication method used for the connection */
+#define SQL_COPT_SS_ACCESS_TOKEN                    (SQL_COPT_SS_BASE_EX+16) /* The authentication access token used for the connection */
 #define SQL_COPT_SS_USE_FMTONLY                     (SQL_COPT_SS_BASE_EX+17) /* The flag to SET FMTONLY ON/OFF */
+
+
+/* SQLSetConnectAttr MS driver additional specific defines. */
+#define SQL_COPT_SS_BASE_ADD                        1400
+#define SQL_COPT_SS_DATACLASSIFICATION_VERSION      (SQL_COPT_SS_BASE_ADD + 1) /* The flag to Set/Get DATACLASSIFICATION version support */
+
 
  /*
  * SQLColAttributes driver specific defines.
@@ -172,6 +180,12 @@ extern "C" {
 /* force column encryption */
 #define SQL_CA_SS_FORCE_ENCRYPT                     (SQL_CA_SS_BASE+36) /*  indicate mandatory encryption for this parameter */
 
+/* Data Classification */
+#define SQL_CA_SS_DATA_CLASSIFICATION               (SQL_CA_SS_BASE+37) /*  retrieve data classification information */
+
+/* Data Classification version*/
+#define SQL_CA_SS_DATA_CLASSIFICATION_VERSION       (SQL_CA_SS_BASE+38) /*  retrieve data classification version */
+
 /* Defines for use with SQL_COPT_SS_PRESERVE_CURSORS */
 #define SQL_PC_OFF                          0L           /*  Cursors are closed on SQLTransact */
 #define SQL_PC_ON                           1L           /*  Cursors remain open on SQLTransact */
@@ -190,7 +204,9 @@ extern "C" {
 #define SQL_AU_PASSWORD                     1L           /*  SQL server authentication is used */
 #define SQL_AU_AD_INTEGRATED                2L           /*  Active Directory integrated authentication is used */
 #define SQL_AU_AD_PASSWORD                  3L           /*  Active Directory password authentication is used */
-#define SQL_AU_RESET                        4L           /*  Reset the value to attribute not set to anything. */
+#define SQL_AU_RESET                        5L           /*  Reset the value to attribute not set to anything. */
+#define SQL_AU_AD_MSI                       6L           /*  Active Directory Manage Service Identity authentication is used */
+
 /* Defines for use with SQL_COPT_SS_TRANSLATE */
 #define SQL_XL_OFF                          0L           /*  Code page translation is not performed */
 #define SQL_XL_ON                           1L           /*  Code page translation is performed */
@@ -483,6 +499,12 @@ typedef struct tagSS_TIMESTAMPOFFSET_STRUCT
 
 #pragma pack()
 
+typedef struct AccessToken
+{
+    unsigned int dataSize;
+    char data[];
+} ACCESSTOKEN;
+
 /* 
  * Keystore Provider interface definitions 
  */
@@ -539,6 +561,7 @@ typedef struct CEKeystoreData
 #define AKVCFG_AUTHMODE_PASSWORD      2
 #define AKVCFG_AUTHMODE_INTEGRATED    3
 #define AKVCFG_AUTHMODE_CERTIFICATE   4
+#define AKVCFG_AUTHMODE_MSI           5
 #define AKVCFG_NOAUTORENEW    0x00000010
 
 #define AKV_CONFIG_PRINCIPALID  1

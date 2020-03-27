@@ -20,6 +20,7 @@ namespace coremvc.Controllers
             this.Configuration = Configuration;
         }
 
+
         private string GetConnectionString() {
             string connectionString = "Driver={ODBC Driver 17 for SQL Server}; " +
                $"Server={Configuration["ODBC:Server"]};" +
@@ -32,12 +33,13 @@ namespace coremvc.Controllers
                $"KeyStorePrincipalId={Configuration["ODBC:KeyStorePrincipalId"]};" +
                $"KeyStoreSecret={Configuration["ODBC:KeyStoreSecret"]};";
 
+            Console.WriteLine(" ======== Conn string =====:" + connectionString);    
             return connectionString;
         }
 
 
         /*
-          CREATE TABLE dbo.person  
+          CREATE TABLE dbo.Persons  
                ( First_Name varchar(25) NOT NULL,  
                  Last_Name varchar(50) NULL)  
             GO 
@@ -60,7 +62,7 @@ namespace coremvc.Controllers
 
             using (IDbCommand dbcmd = dbcon.CreateCommand())
             {
-                dbcmd.CommandText = "SELECT * FROM assessment";
+                dbcmd.CommandText = "SELECT * FROM Persons";
 
                 IDataReader dbReader = dbcmd.ExecuteReader();
                 int fCount = dbReader.FieldCount;
@@ -83,7 +85,7 @@ namespace coremvc.Controllers
                         object col = dbReader.GetValue(i);
                         
 
-                        rowData = rowData + " | " + ConvertFromDBVal<string>(col);
+                        rowData = rowData + " | " + ConvertFromDBVal(col);
                     }
                     ViewData["Row" + row] = rowData;
                     row++;
@@ -97,15 +99,15 @@ namespace coremvc.Controllers
             return View();
         }
 
-        public static T ConvertFromDBVal<T>(object obj)
+        public static String ConvertFromDBVal(object obj)
         {
             if (obj == null || obj == DBNull.Value)
             {
-                return default(T); // returns the default value for the type
+                return string.Empty;  //return default(T); // returns the default value for the type
             }
             else
             {
-                return (T)obj;
+                return obj.ToString();
             }
         }
 

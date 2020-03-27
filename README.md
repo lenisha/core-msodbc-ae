@@ -84,6 +84,8 @@ Refer to `manifest.yml` for example  of setting connection string variables:
      ODBC__KeyStoreSecret: <spn secret>
 ```
 
+Make sure Service Principal is granted access policy for KeyVault Keys including all Cryptographic Operations
+
 ### Build and Run
 
 Set all the ODBC connectivity vaules in `manifest.yml` with your SQL server/db and service principal credentials.
@@ -93,13 +95,13 @@ Set all the ODBC connectivity vaules in `manifest.yml` with your SQL server/db a
 ```
 dotnet restore
 dotnet build
-dotnet publish -c Release
+dotnet publish -c Release 
 ```
 
 Note: added in project file to point to linux runtime (used by PCF cells) and .net runtime that is used by dotnetcore2.1 buildpack 
 ```
     <TargetFramework>netcoreapp2.1</TargetFramework>
-	<RuntimeIdentifiers>ubuntu.14.04-x64</RuntimeIdentifiers>
+	<RuntimeIdentifiers>ubuntu.16.04-x64</RuntimeIdentifiers>
 	<RuntimeFrameworkVersion>2.1.4</RuntimeFrameworkVersion>
 ```
 
@@ -107,7 +109,7 @@ Note: added in project file to point to linux runtime (used by PCF cells) and .n
 
 ```
 cd bin/Release/netcoreapp2.1/publish
-cf push -f manifest.yml -b https://github.com/cloudfoundry/dotnet-core-buildpack.git#v2.1.4
+cf push -f manifest.yml 
 ```
 
 - Navigate to application home - this page will retrive and show data that was encrypted
@@ -118,3 +120,33 @@ To test on Ubuntu VM with dotnet runtime installed, set all required env variabl
 dotnet coremvc.dll
 ```
 
+## Update driver Notes
+
+On linux VM install [ODBC Driver](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#ubuntu17)
+
+Verify install at `/opt/microsoft/msodbcsql17` , will need all files in installed directory
+and some libraries from dependencies.
+List dependencoes with `ldd` command:
+
+```
+azureuser@xenial:/opt/microsoft/msodbcsql17$ ldd lib64/libmsodbcsql-17.5.so.2.1 
+        linux-vdso.so.1 =>  (0x00007ffff958f000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007ffa7091d000)
+        librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007ffa70715000)
+        libodbcinst.so.2 => /usr/lib/x86_64-linux-gnu/libodbcinst.so.2 (0x00007ffa704fa000)
+        libkrb5.so.3 => /usr/lib/x86_64-linux-gnu/libkrb5.so.3 (0x00007ffa70228000)
+        libgssapi_krb5.so.2 => /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2 (0x00007ffa6ffde000)
+        libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007ffa6fc5c000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffa6f953000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007ffa6f73d000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007ffa6f520000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffa6f156000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007ffa70f38000)
+        libk5crypto.so.3 => /usr/lib/x86_64-linux-gnu/libk5crypto.so.3 (0x00007ffa6ef27000)
+        libcom_err.so.2 => /lib/x86_64-linux-gnu/libcom_err.so.2 (0x00007ffa6ed23000)
+        libkrb5support.so.0 => /usr/lib/x86_64-linux-gnu/libkrb5support.so.0 (0x00007ffa6eb18000)
+        libkeyutils.so.1 => /lib/x86_64-linux-gnu/libkeyutils.so.1 (0x00007ffa6e914000)
+        libresolv.so.2 => /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007ffa6e6f9000)
+ ```       
+
+ Add all `/usr/lib/x86_64-linux-gnu/libodbc*.so.2` libraries
