@@ -26,26 +26,18 @@ Example could be found in this project `manifest.yml`
 This example uses very simple SQL table that could be created
  
  ```
-  CREATE TABLE [dbo].[assessment] (
-    [assessment_id] [nvarchar](max),        
-    [database_name] [nvarchar](200),        
-    [space_name] [nvarchar](40),    
-    [connection_string] [nvarchar](max),    
-    [assessment_status] [nvarchar](max),
-    [assessment_parameters] [nvarchar](max),
-    [email_list] [nvarchar](max),       
-    [assessment_result] [nvarchar](max),        
-    [errors] [nvarchar](max),
-    [created_on] DATETIME,
-    [modified_on] DATETIME
-)
- GO
+CREATE TABLE dbo.Persons  
+               ( First_Name varchar(25) NOT NULL,  
+                 Last_Name varchar(50) NULL)  
+GO 
 
- 
- Insert into [dbo].[assessment] ( assessment_id, assessment_status) values ('aaa', 'dsdsd');
- Insert into [dbo].[assessment] ( assessment_id, assessment_status) values ('bbb', 'dddd');
+INSERT Persons Values ('Test', 'Blah blah');
+INSERT Persons Values ('Test2', 'mine blah');
+INSERT Persons Values ('Test3', 'ohhhh blah');
 
- select * from [dbo].[assessment];
+GO
+
+ select * from [dbo].[Persons];
 
   ```
  
