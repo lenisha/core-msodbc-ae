@@ -7,9 +7,9 @@ Driver details are here: https://docs.microsoft.com/en-us/sql/connect/odbc/linux
 
 Applications uses Nuget package `System.Data.ODBC` and corresponding OdbcConnection and DataReader - rfor details refer to `HomeController.cs`
 
-###  MS ODBC driver files for Linux 14
+###  MS ODBC driver files for Linux 16
 For the Core application to be able to use it ODBC driver WITHOUT installing it, all the required libraries should be included along with the application.
-In this example all Ubuntu 14 related libraries and resources are included with the application in `msodbcsql17` directory. 
+In this example all Ubuntu 16 related libraries and resources are included with the application in `msodbcsql17` directory. (driver version 17.5.2)
 During `publish` this directory is copied alond with other application artifacts.
 
 For the driver to load required libraries and find system ini files, following environment variables have to be set:
